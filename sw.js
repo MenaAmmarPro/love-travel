@@ -1,6 +1,6 @@
 "use strict";
 
-const CACHE = "our-travels-v1";
+const CACHE = "our-travels-v2";
 
 const ASSETS = [
   "./",
