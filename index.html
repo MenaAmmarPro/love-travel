@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090b20">
+  <meta name="description" content="Our Travels — plan trips together: itineraries, packing lists and budgets, kept on your own device for Mena.">
+  <title>Our Travels ✦ Love for Mena</title>
+  <link rel="canonical" href="https://menaammarpro.github.io/love-travel/">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Our Travels — for Mena">
+  <meta property="og:title" content="Our Travels ✦ Love for Mena">
+  <meta property="og:description" content="Plan our trips together — itinerary, packing and budget in one place.">
+  <meta property="og:url" content="https://menaammarpro.github.io/love-travel/">
+  <meta property="og:image" content="https://menaammarpro.github.io/love-travel/assets/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Our Travels">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/icon-192.png">
+</head>
+<body>
+  <canvas id="starfield" aria-hidden="true"></canvas>
+
+  <header class="site-header">
+    <a class="brand" href="index.html">✈ Our Travels</a>
+    <button class="menu-toggle" aria-label="Open navigation" aria-expanded="false">Menu</button>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a class="active" href="index.html">Home</a>
+      <a href="#trips">Trips</a>
+      <a href="#plan">Plan</a>
+      <a href="#details">Details</a>
+      <div class="nav-more">
+        <button class="nav-more-toggle" type="button" aria-expanded="false">More <span class="caret">▾</span></button>
+        <div class="nav-more-menu">
+          <a href="https://menaammarpro.github.io/love-map/">love-map</a>
+          <a href="https://menaammarpro.github.io/love-timezone/">love-timezone</a>
+          <a href="https://menaammarpro.github.io/love-countdown/">love-countdown</a>
+          <a href="https://menaammarpro.github.io/love-gallery/">love-gallery</a>
+          <a href="https://menaammarpro.github.io/">All projects ↗</a>
+        </div>
+      </div>
+      <button class="theme-toggle" type="button" aria-label="Toggle color theme">Theme</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero travel-hero">
+      <p class="eyebrow">EVERYWHERE, TOGETHER</p>
+      <div class="moon" aria-hidden="true">✈</div>
+      <p class="small-caption">Somewhere out there is a place with our name on it.</p>
+      <h1>Our <span>travels.</span></h1>
+      <p class="hero-description">
+        Plan a trip, write each day as an itinerary, pack together with a
+        checklist, and keep an eye on the budget. Everything stays on this
+        device, just for the two of us.
+      </p>
+      <div class="next-trip" id="next-trip">
+        <p class="next-trip-label" id="next-label">No trips yet — add the first one</p>
+        <p class="next-trip-name" id="next-name"></p>
+        <p class="next-trip-count" id="next-count"></p>
+      </div>
+      <div class="hero-actions">
+        <a class="button button-primary" href="#trips">Plan a trip <span>♥</span></a>
+      </div>
+      <p class="signature">Made with love, just for you <span>♥</span></p>
+    </section>
+
+    <section class="section" id="trips">
+      <p class="eyebrow">WHERE WE'RE GOING</p>
+      <h2>Our <span>trips.</span></h2>
+      <p class="section-note">Create a trip, then open it to plan the days, pack, and set a budget.</p>
+
+      <form class="new-trip-form" id="new-trip-form">
+        <div class="new-trip-row">
+          <label class="field">
+            <span>Trip name</span>
+            <input id="nt-name" type="text" maxlength="60" required placeholder="Our first adventure">
+          </label>
+          <label class="field">
+            <span>Destination</span>
+            <input id="nt-dest" type="text" maxlength="80" placeholder="Bucharest">
+          </label>
+        </div>
+        <div class="new-trip-row">
+          <label class="field field-date">
+            <span>Start</span>
+            <input id="nt-start" type="date">
+          </label>
+          <label class="field field-date">
+            <span>End</span>
+            <input id="nt-end" type="date">
+          </label>
+          <label class="field field-currency">
+            <span>Currency</span>
+            <select id="nt-currency">
+              <option value="EUR">EUR €</option>
+              <option value="RON">RON lei</option>
+              <option value="PKR">PKR ₨</option>
+              <option value="USD">USD $</option>
+            </select>
+          </label>
+          <button class="button button-primary" type="submit">Create trip <span>♥</span></button>
+        </div>
+        <p class="section-note" id="trip-note" aria-live="polite"></p>
+      </form>
+
+      <div class="trip-list" id="trip-list"></div>
+    </section>
+
+    <section class="section" id="plan">
+      <p class="eyebrow">THE PLAN</p>
+      <h2>Itinerary, packing &amp; <span>budget.</span></h2>
+      <div id="trip-detail" class="trip-detail"></div>
+    </section>
+
+    <section class="section" id="details">
+      <p class="eyebrow">JUST FOR US</p>
+      <h2>Details.</h2>
+      <div class="settings-actions">
+        <button class="button button-ghost" id="export-trips" type="button">Export all trips (JSON)</button>
+        <label class="button button-ghost file-label">
+          Import trips
+          <input id="import-trips" type="file" accept="application/json,.json" hidden>
+        </label>
+        <button class="button button-ghost" id="clear-trips" type="button">Remove all trips</button>
+      </div>
+      <p class="settings-note" id="save-note" aria-live="polite"></p>
+      <p class="section-note">Export saves your whole plan as a small JSON file you can keep safe.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Made with care <span>♥</span> for Mena</p>
+    <p class="footer-small">A little universe of its own ✦</p>
+  </footer>
+
+  <script src="js/theme-main.js" defer></script>
+  <script src="js/effects.js" defer></script>
+  <script src="js/app.js" defer></script>
+</body>
+</html>
