@@ -518,7 +518,9 @@
     var panel = el("div", "detail-head");
 
     var title = el("div", "detail-title");
-    title.appendChild(el("h3")).textContent = trip.name;
+    var heading = el("h3");
+    heading.textContent = trip.name;
+    title.appendChild(heading);
     var count = el("span", "detail-count");
     count.textContent = countdownLabel(trip);
     title.appendChild(count);
@@ -528,6 +530,7 @@
 
     fields.appendChild(fieldInput("Name", "text", trip.name, 60, function (v) {
       trip.name = String(v || "Untitled trip").slice(0, 60);
+      if (heading) heading.textContent = trip.name;
       afterTripChange(false);
     }));
     fields.appendChild(fieldInput("Destination", "text", trip.dest, 80, function (v) {
